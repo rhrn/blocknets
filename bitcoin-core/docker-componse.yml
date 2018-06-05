@@ -1,0 +1,21 @@
+version: '3.3'
+
+volumes:
+  bitcoin_core_data:
+    driver: local
+
+services:
+  bitcoin:
+    image: ruimarinho/bitcoin-core
+    ports:
+      - 8332:8332
+    command: >
+      -printtoconsole
+      -rpcallowip=0.0.0.0/0
+      -txindex
+      -server
+      -rpcthreads=64
+      -rpcauth='user:pass'
+    restart: unless-stopped
+    volumes:
+      - bitcoin_core_data:/home/bitcoin/.bitcoin

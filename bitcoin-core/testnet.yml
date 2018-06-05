@@ -1,0 +1,23 @@
+version: '3.3'
+
+volumes:
+  bitcoin_core_testnet_data:
+    driver: local
+
+services:
+  bitcoin_testnet:
+    image: ruimarinho/bitcoin-core
+    ports:
+      - 18332:18332
+    command: >
+      -printtoconsole
+      -rpcallowip=0.0.0.0/0
+      -testnet
+      -txindex
+      -server
+      -onlynet=ipv4
+      -rpcthreads=64
+      -rpcauth='user:pass'
+    restart: unless-stopped
+    volumes:
+      - bitcoin_core_testnet_data:/home/bitcoin/.bitcoin
