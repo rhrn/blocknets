@@ -1,0 +1,25 @@
+version: '3.3'
+
+volumes:
+  zcash_data:
+    driver: local
+
+services:
+  zcash:
+    image: rhrn/zcash
+    command: >
+      /zcash/src/zcashd
+      -printtoconsole
+      -rpcallowip=0.0.0.0/0
+      -txindex
+      -server
+      -rpcthreads=64
+    environment:
+      - ZCASH_RPCUSER=user
+      - ZCASH_RPCPASSWORD=pass
+    ports:
+      - 8232:8232
+      - 8233:8233
+    restart: unless-stopped
+    volumes:
+      - zcash_data:/root/.zcash

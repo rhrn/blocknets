@@ -1,0 +1,28 @@
+version: '3.3'
+
+volumes:
+  zcash_testnet_data:
+    driver: local
+
+services:
+  zcash_testnet:
+    image: rhrn/zcash
+    command: >
+      /zcash/src/zcashd
+      -testnet
+      -printtoconsole
+      -rpcallowip=0.0.0.0/0
+      -onlynet=ipv4
+      -txindex
+      -server
+      -rpcthreads=64
+    environment:
+      - ZCASH_NETWORK=testnet
+      - ZCASH_NODE=testnet.z.cash
+      - ZCASH_RPCUSER=user
+      - ZCASH_RPCPASSWORD=pass
+    ports:
+      - 18232:18232
+    restart: unless-stopped
+    volumes:
+      - zcash_testnet_data:/root/.zcash
