@@ -1,0 +1,34 @@
+version: '3.3'
+
+volumes:
+  ethereum_testnet_data:
+    driver: local
+
+services:
+  
+  ethereum:
+    #image: parity/parity:stable-release
+    image: parity/parity:nightly
+    command: >
+      --jsonrpc-interface 0.0.0.0
+      --ws-interface 0.0.0.0
+      --jsonrpc-port 18545
+      --ws-port 18546
+      --ui-port 18180
+      --jsonrpc-cors "*"
+      --ui-no-validation ui
+      --unsafe-expose
+      --ui-interface all
+      --jsonrpc-interface all
+      --ws-interface all
+      --ws-origins all
+      --ws-hosts all
+      --mode=active
+      --chain kovan
+    ports:
+      - 18545:18545
+      - 18546:18546
+      - 18180:18180
+    restart: unless-stopped
+    volumes:
+      - ethereum_testnet_data:/root

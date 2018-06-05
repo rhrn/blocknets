@@ -1,0 +1,21 @@
+version: '3.3'
+
+volumes:
+  ethereum_data:
+    driver: local
+
+services:
+  
+  ethereum:
+    image: parity/parity:stable-release
+    command: >
+      --jsonrpc-interface 0.0.0.0
+      --jsonrpc-cors "*"
+      --ws-interface 0.0.0.0
+      --mode=active
+    ports:
+      - 8545:8545
+      - 8546:8546
+    restart: unless-stopped
+    volumes:
+      - ethereum_data:/root
