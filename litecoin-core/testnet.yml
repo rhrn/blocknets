@@ -1,0 +1,24 @@
+version: '3.3'
+
+volumes:
+  litecoin_core_testnet_data:
+    driver: local
+
+services:
+  litecoin_testnet:
+    image: uphold/litecoin-core
+    ports:
+      - 19332:19332
+    command: >
+      -printtoconsole
+      -rpcallowip=0.0.0.0/0
+      -testnet
+      -txindex
+      -server
+      -onlynet=ipv4
+      -rpcuser=user
+      -rpcpassword=pass
+      -rpcthreads=64
+    restart: unless-stopped
+    volumes:
+      - litecoin_core_testnet_data:/home/litecoin/.litecoin
