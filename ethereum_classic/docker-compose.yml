@@ -1,0 +1,22 @@
+version: '3.3'
+
+volumes:
+  ethereum_classic_data:
+    driver: local
+
+services:
+  
+  ethereum_classic:
+    image: parity/parity:stable-release
+    command: >
+      --jsonrpc-interface 0.0.0.0
+      --jsonrpc-cors "*"
+      --ws-interface 0.0.0.0
+      --mode=active
+      --chain classic
+    ports:
+      - 9545:8545
+      - 9546:8546
+    restart: unless-stopped
+    volumes:
+      - ethereum_classic_data:/root

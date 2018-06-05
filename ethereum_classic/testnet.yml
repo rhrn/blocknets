@@ -1,0 +1,22 @@
+version: '3'
+
+volumes:
+  ethereum_classic_testnet_data:
+    driver: local
+
+services:
+  
+  ethereum_classic_testnet:
+    image: parity/parity:stable-release
+    command: >
+      --jsonrpc-interface 0.0.0.0
+      --jsonrpc-cors "*"
+      --ws-interface 0.0.0.0
+      --mode=active
+      --chain morden
+    ports:
+      - 19545:8545
+      - 19546:8546
+    restart: unless-stopped
+    volumes:
+      - ethereum_classic_testnet_data:/root
