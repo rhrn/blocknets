@@ -10,17 +10,15 @@ services:
     #image: parity/parity:stable-release
     image: parity/parity:nightly
     command: >
-      --jsonrpc-interface 0.0.0.0
-      --ws-interface 0.0.0.0
+      --jsonrpc-interface all
+      --ws-interface all
+      --ui-interface all
       --jsonrpc-port 18545
       --ws-port 18546
       --ui-port 18180
       --jsonrpc-cors "*"
-      --ui-no-validation ui
+      --ui-no-validation
       --unsafe-expose
-      --ui-interface all
-      --jsonrpc-interface all
-      --ws-interface all
       --ws-origins all
       --ws-hosts all
       --mode=active
